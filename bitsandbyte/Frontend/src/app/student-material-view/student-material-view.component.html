@@ -1,0 +1,110 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #004a9f; padding: 2px; ">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+  
+    <form class="form-inline">
+  
+     
+            <a class="btn mr-1" type="button" routerLink="/studentBlog" id="dropdownMenu2" data-toggle="dropdown" >
+                 <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i> 
+            </a>
+       
+  
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+    </form>
+  </nav>
+  <!-- SideNav Bar -->
+  
+  <mat-sidenav-container>
+      <mat-sidenav #sidenav="matSidenav">
+  
+          <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+  
+          <h4 class="name" style="font-family:'Times New Roman', Times, serif;font-size: 19px;">{{studentList.studentName}}</h4>
+  
+          <mat-divider></mat-divider>
+  
+          <a mat-button class="menu-button"  routerLink="/studentDashboard">
+              <mat-icon>home</mat-icon>
+              <span>Home</span>
+          </a>
+  
+          <a mat-button class="menu-button" routerLink="/studentProfile">
+              <mat-icon>person</mat-icon>
+              <span>My Profile</span>
+          </a>
+          <a mat-button class="menu-button" routerLink="/message">
+              <mat-icon>message</mat-icon>
+              <span>Message</span>
+          </a>
+  
+          <a mat-button class="menu-button" routerLink="/studentCourse">
+            <mat-icon>file_copy</mat-icon>
+            <span>Courses</span>
+        </a>
+  
+          <a mat-button class="menu-button" routerLink="/studentMaterial">
+              <mat-icon>more</mat-icon>
+              <span>View Material</span>
+          </a>
+  
+  
+  
+      </mat-sidenav>
+  
+      <!-- Main Content -->
+      <mat-sidenav-content class="content mat-elevation-z8 ">
+          <!-- <div class="content mat-elevation-z8"> -->
+            <div class="content">
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a routerLink="/studentDashboard">Home</a></li>
+                      <li class="breadcrumb-item"><a routerLink="/studentMaterial">Course Material</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{course.courseName}} </li>
+                    </ol>
+                  </nav>
+            <div class="table_responsive">
+  
+                <table class="table ta table-striped table-light table-hover mt-3">
+                  <thead class="thead text-white" style="background-color: #002b5c;">
+                    <tr style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+         
+                      <th scope="col"> Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col" >Material Url</th>
+                      <th scope="col" >Action</th>
+                     
+                    
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor = "let courseList of material" style="font-family:'Times New Roman', Times, serif;font-size: 15px;">
+        
+                      <td>{{courseList.title}}</td>
+                      <td>{{courseList.description}}</td>
+                      <td>{{courseList.materialUrl}}</td>
+                      <td>
+            
+                        <button  class="btn btn-info mr-2 my-1" (click)="download(courseList.attachmentId)" data-bs-toggle="modal"  data-bs-target="#exampleModal"> <i class="fa fa-download mr-2  text-white" aria-hidden="true"></i>Download</button>
+                    
+
+                    </td>
+                    </tr>  
+                  </tbody>
+                </table>
+            
+              </div>
+            </div>
+            
+     
+      </mat-sidenav-content>
+  </mat-sidenav-container>

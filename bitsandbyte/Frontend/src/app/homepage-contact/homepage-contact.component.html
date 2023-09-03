@@ -1,0 +1,196 @@
+<app-home-navbar></app-home-navbar>
+
+<div class="container mt-4">
+  <span class="big-circle"></span>
+  <img src="img/shape.png" class="square" alt="" />
+  <div class="form">
+    <div class="contact-info">
+      <h3 class="title">Let's get in touch</h3>
+      <p class="text">
+        Bits And Byte Institute of Technology offers you different computer courses that will improve your growth and
+        helps to build good future by fitting you into modern tools and technology.
+      </p>
+
+      <div class="info">
+        <div class="information">
+          <i class="fa fa-map-marker fa-2x "></i>
+          <h3 class="ml-3 mt-2">Gaur-3,Rautahat, Nepal</h3>
+        </div>
+        <div class="information">
+          <i class="fa fa-envelope  " style="font-size: 25px;"></i>
+          <h3 class="ml-3 mt-3">bitsandbytetech@gmail.com</h3>
+        </div>
+        <div class="information">
+          <i class="fa fa-phone fa-2x "></i>
+          <h3 class="ml-3 mt-2">+977-9845474532</h3>
+        </div>
+      </div>
+
+      <div class="social-media">
+        <p>Connect with us :</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/bitsandbytetech" target="_blank">
+            <i class="fa fa-facebook fa-2x mt-1"></i>
+          </a>
+          <a>
+            <i class="fa fa-envelope fa-2x mt-1"></i>
+          </a>
+          <a href="https://www.instagram.com/bitsandbytetech/" target="_blank">
+            <i class="fa fa-instagram fa-2x mt-1"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/bitsandbytetech/" target="_blank">
+            <i class="fa fa-linkedin-square fa-2x mt-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <span class="circle one"></span>
+      <span class="circle two"></span>
+
+      <form #contactMessage="ngForm" (ngSubmit)='sendMessage()'>
+
+ <!-- name field  -->
+       
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text"> <i class="fa fa-user "></i></div>
+          </div>
+          <input type="text" [(ngModel)]='contact.name' required #name='ngModel' id="name" name="name"
+            class="form-control" placeholder="Name"  [class.is-invalid]='name.invalid && name.touched' minlength="3"
+             pattern='^[A-Za-z\s]+$'>
+        </div>
+          <!-- validation message  -->
+          <div *ngIf='name.touched'>
+            <div *ngIf='name.errors && (name.invalid)'>
+                <small class="text-danger" *ngIf='name.errors.required'>
+                    Name is required.
+                </small>
+                <small class="text-danger" *ngIf='name.errors.pattern'>
+                    Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='name.errors.minlength'>
+                     Name should be minimum 3 character.
+                </small>
+            </div>
+        </div>
+
+ <!-- Phone field  -->
+        
+        <label class="sr-only" for="inlineFormInputGroupUsername2">Phone</label>
+        <div class="input-group mb-2 mr-sm-2 mt-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-phone "></i></div>
+          </div>
+          <input type="text" [(ngModel)]='contact.phone' required #phone='ngModel' id="phone" name="phone"
+            class="form-control" placeholder="Phone" minlength="10" maxlength="10"  pattern='^[0-9]*$'
+            [class.is-invalid]='phone.invalid && phone.touched' >
+        </div>
+  <!-- validation message  -->
+  <div *ngIf='phone.touched'>
+    <div *ngIf='phone.errors && (phone.invalid)'>
+        <small class="text-danger" *ngIf='phone.errors.required'>
+            Phone number is required.
+        </small>
+        <small class="text-danger" *ngIf='phone.errors.pattern'>
+            Phone number should be numeric.
+        </small>
+        <small class="text-danger" *ngIf='phone.errors.minlength || phone.errors.maxlength'>
+             Phone number should be of 10 digit.
+        </small>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+         <!-- Email field  -->
+        <label class="sr-only" for="inlineFormInputGroupUsername2">Email</label>
+        <div class="input-group mb-2 mr-sm-2 mt-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-envelope "></i></div>
+          </div>
+          <input type="text" [(ngModel)]='contact.email' required #email='ngModel' id="email" name="email"
+            class="form-control" placeholder="Email" [class.is-invalid]='email.invalid && email.touched'
+            pattern='^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+[a-zA-Z0-9.-]+$'>
+        </div>
+          <!-- validation message   -->
+          <div *ngIf='email.touched'>
+            <div *ngIf='email.errors && (email.invalid)'>
+                <small class="text-danger" *ngIf='email.errors.required'>
+                    Email is required.
+                </small>
+                <small class="text-danger" *ngIf='email.errors.pattern'>
+                    Please enter valid email id (Ex. bitsandbytetech@gmail.com).
+                </small>
+            </div>
+        </div>
+
+
+         <!-- Address field  -->
+        <label class="sr-only" for="inlineFormInputGroupUsername2">Address</label>
+        <div class="input-group mb-2 mr-sm-2 mt-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-map-marker"></i></div>
+          </div>
+          <input type="text" [(ngModel)]='contact.address' required #address='ngModel' id="address" name="address"
+            class="form-control" placeholder="Address" [class.is-invalid]='address.invalid && address.touched' minlength="3">
+        </div>
+              <!-- validation message   -->
+              <div *ngIf='address.touched'>
+                <div *ngIf='address.errors && (address.invalid)'>
+                    <small class="text-danger" *ngIf='address.errors.required'>
+                        Address is required.
+                    </small>
+                    <small class="text-danger" *ngIf='address.errors.minlength'>
+                      Address should be of minimum 3 character.
+                 </small>
+                   
+                </div>
+            </div>
+
+         <!-- Message field  -->
+        <label class="sr-only" for="inlineFormInputGroupUsername2">Message</label>
+        <div class="input-group mb-2 mr-sm-2 mt-3">
+
+
+
+          <textarea [(ngModel)]='contact.message' required #message='ngModel' id="message" name="message"
+            class="form-control" rows="5" placeholder="Message" [class.is-invalid]='address.invalid && address.touched' 
+            minlength="3"></textarea>
+
+
+        </div>
+        
+             <!-- validation message   -->
+             <div *ngIf='message.touched'>
+              <div *ngIf='message.errors && (message.invalid)'>
+                  <small class="text-danger" *ngIf='message.errors.required'>
+                      Message is required.
+                  </small>
+                  <small class="text-danger" *ngIf='message.errors.minlength'>
+                    Message should be of minimum 3 character.
+               </small>
+                 
+              </div>
+          </div>
+
+
+
+        <button type="submit" [disabled]="contactMessage.invalid" class="btn btn-primary   mt-3" name="register" value="register">Submit</button>
+      <p class="text-white mt-2">All the details should be filled inorder to submit this form.</p>
+      
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<app-footer></app-footer>

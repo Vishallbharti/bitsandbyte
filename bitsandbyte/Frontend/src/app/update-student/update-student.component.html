@@ -1,0 +1,334 @@
+
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #004a9f;">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <a class="navbar-brand"> Bits And Byte Institute of Technology</a>
+    <form class="form-inline">
+
+      <div class="dropdown   mr-0 ">
+        <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown" >
+             <i class="fa fa-rss-square  text-white fa-2x" aria-hidden="true"></i> 
+        </a>
+        <div class="dropdown-menu  "aria-labelledby="dropdownMenu2 "  >
+          <button class="dropdown-item " type="button" routerLink="/blog">Blog</button>
+          <button class="dropdown-item  " type="button" routerLink="/pendingBlog" >Pending Blog</button>
+        </div>
+      </div>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-danger my-2 my-sm-0" type="submit">Log Out</button>
+    </form>
+  </nav>
+  
+  <!-- Side Nav Bar -->
+  <mat-sidenav-container >
+      <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+  
+        
+          <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+  
+          <h4 class="name">Bits And Byte</h4>
+  
+          <mat-divider></mat-divider>
+  
+          <button mat-button class="menu-button" routerLink="/adminDashboard">
+              <mat-icon>home</mat-icon>
+              <span>Home</span>
+          </button>
+  
+          <button mat-button class="menu-button" routerLink="/addStudent">
+              <mat-icon>person</mat-icon>
+              <span>Add Student</span>
+          </button>
+          <button mat-button class="menu-button" routerLink="/studentDetails">
+              <mat-icon>info</mat-icon>
+              <span>Student Details</span>
+          </button>
+  
+        
+  
+          <button mat-button class="menu-button" routerLink="/addMaterial">
+              <mat-icon>cloud_upload</mat-icon>
+              <span>Add Material </span>
+          </button>
+  
+        
+  
+      </mat-sidenav>
+  <!-- Main Content Here -->
+  
+      <mat-sidenav-content class="content mat-elevation-z8 ">
+          <!-- <div class="content mat-elevation-z8"> -->
+              <h1 class="text-center mt-4 text-primary "> <strong>Add New Student</strong> </h1>
+           
+    <div class="content ">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/adminDashboard">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add Student</li>
+        </ol>
+      </nav>
+
+      <form #userform='ngForm' (ngSubmit)='updateStudent()'>
+
+
+
+        <!--  -->
+
+        <div class="form-row float-right">
+          <div class="form-group col-md-3">
+            <div style="text-align:center">
+              <label for="image" *ngIf="!url" class=" p_img text-white rounded-circle bg-dark"
+                style="width: 250px; height: 250px;"></label>
+
+              <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+              <div><img [src]="url" *ngIf="url" width="250px" height="250px" class="rounded-circle p_img"></div>
+
+              <span>
+                <input type="file" (change)="selectFile($event)">
+
+              </span>
+
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <!--  -->
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.studentSr' required #studentSr='ngModel' id="studentSr"
+              name="studentSr" class="form-control" placeholder="Student ID">
+          </div>
+
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.studentName' required #studentName  ='ngModel' id="studentName" name="studentName"
+              class="form-control" placeholder="Name">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.fatherName' required #fatherName='ngModel' id="fatherName"
+              name="fatherName" class="form-control" placeholder="Father's Name">
+          </div>
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.motherName' required #motherName='ngModel' id="motherName"
+              name="motherName" class="form-control" placeholder="Mother's Name">
+          </div>
+        </div>
+
+        <!--  -->
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                Gender
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                <input type="radio" class="form-check-input" [(ngModel)]='student.gender' required #gender='ngModel'
+                  id="male" name="gender" value="male" checked>Male
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group ml-5">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                <input type="radio" class="form-check-input" [(ngModel)]='student.gender' required #gender='ngModel'
+                  id="female" name="gender" value="female">Female
+              </label>
+            </div>
+          </div>
+
+         
+
+        </div>
+
+        <div class="form-row ">
+
+          <div class="form-group col-md-6">
+            <input type="number" [(ngModel)]='student.mobile' required #mobile='ngModel' id="mobile" name="mobile"
+              class="form-control" placeholder="Phone Number">
+          </div>
+          <div class="form-group col-md-6">
+            <input type="number" [(ngModel)]='student.guardianMobile' required #guardianMobile='ngModel' id="guardianMobile"
+              name="guardianMobile" class="form-control" placeholder="Parent Phone ">
+          </div>
+
+
+
+        </div>
+
+        <div class="form-row ">
+
+
+          <div class="form-group col-md-6">
+            <input type="email" [(ngModel)]='student.email' required #email='ngModel' id="email" name="email"
+              class="form-control" placeholder="Email">
+          </div>
+
+          <div class="form-group col-md-6">
+            <!-- <input type="text" [(ngModel)]='student.blood' required #blood='ngModel' id="blood" name="blood"
+              class="form-control" placeholder="Blood Group"> -->
+              <input type="text" class="form-control" placeholder="Blood Group" >
+          </div>
+
+        </div>
+
+<!-- 
+        <div class="form-row">
+         
+
+          <div class="form-group col-md-6">
+
+            <input type="number" [(ngModel)]='student.courseDuration' required #courseDuration='ngModel'
+              id="courseDuration  " name="courseDuration " class="form-control" placeholder="Course Duration">
+          </div>
+
+        </div> -->
+
+
+
+
+        <!-- Current Address -->
+        <label for="Current Address ">
+          <h2 class="ml-1">Current Address</h2>
+        </label>
+        <div class="form-row ">
+
+
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='currAddress.houseNumber' required #currentHouseNumber='ngModel'
+            id="houseNumber  " name="houseNumber "  placeholder="House Number">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.streetAddress' required #currentStreetAddress='ngModel'
+            id="streetAddress  " name="streetAddress" placeholder="Street Address">
+          </div>
+
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.city' required #currentCity='ngModel'
+            id="city  " name="city" placeholder="City ">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control"  [(ngModel)]='currAddress.state' required #currentState='ngModel'
+            id="state  " name="state" placeholder="State">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='currAddress.zipCode' required #currentZipCode='ngModel'
+            id="zipCode  " name="zipCode"  placeholder="Zip Code">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.country' required #currentCountry='ngModel'
+            id="country  " name="country" placeholder="Country">
+          </div>
+
+
+
+        </div>
+        <!-- Permanent Address -->
+        <label for="Permanent Address ">
+          <h2>Permanent Address</h2>
+        </label>
+        <div class="form-row ">
+
+
+          
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='perAddress.houseNumber' required #perHouseNumber='ngModel'
+            id="houseNumber" name="houseNumber " placeholder="House Number">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.streetAddress' required #perStreetAddress='ngModel'
+            id="streetAddress" name="streetAddress" placeholder="Street">
+          </div>
+
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.city' required #perCity='ngModel'
+            id="city" name="city" placeholder="City ">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.state' required #perState='ngModel'
+            id="state" name="state" placeholder="State ">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='perAddress.zipCode' required #perZipCode='ngModel'
+            id="zipCode" name="zipCode" placeholder="Zip Code">
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.country' required #perCountry='ngModel'
+            id="country" name="country" placeholder="Country">
+          </div>
+
+        </div>
+
+        <div class="form-row ">
+          <div class="form-group col-md-3">
+
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <select matNativeControl required [(ngModel)]='student.status' id="status" required #status='ngModel'
+                name="status" class="form-control">
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+                <option value="Hold">Hold</option>
+                <option value="Left">Left</option>
+              </select>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group col-md-4">
+            <div class="form-check">
+              <mat-form-field  appearance="fill">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]='student.birthDay' required #birthDay ='ngModel' id="birthDay"
+                  name="birthDay" class="form-control">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!--Certificate  -->
+          <div class="form-group">
+            <label for="inputLastName" class="label">Certificate</label>
+
+            <input type="file" class="form-control" name="img_url" accept=".jpg,.jpeg,.png"
+              aria-describedby="emailHelp">
+          </div>
+
+      
+        </div>
+
+
+        <button type="submit" name="register" value="Register"  class="btn btn-primary center my-3">Submit</button>
+      </form>
+
+    </div>
+      </mat-sidenav-content>
+  </mat-sidenav-container>

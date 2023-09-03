@@ -1,0 +1,172 @@
+<nav class="navbar navbar-dark text-white  justify-content-between   " style="background-color: #002b5c;padding: 2px;">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+
+    <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+    <form class="form-inline">
+
+        <i class="fa fa-t"></i>
+
+        <div class="dropdown ">
+            <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+                <i class="	fa fa-book text-white " style="font-size: 25px;" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+                <button class="dropdown-item " type="button" routerLink="/addCourse">Add Course</button>
+                <button class="dropdown-item  " type="button" routerLink="/adminViewCourse">View Course</button>
+
+            </div>
+        </div>
+
+        <div class="dropdown ">
+            <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+                <i class="fa fa-comments  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+                <button class="dropdown-item " type="button" routerLink="/adminMessage">Student</button>
+                <button class="dropdown-item  " type="button" routerLink="/contactForm">Contact Form</button>
+                <button class="dropdown-item  " type="button" routerLink="/adminStudyInIndia">Study In India</button>
+            </div>
+        </div>
+
+        <div class="dropdown    ">
+            <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown">
+                <i class="fa fa-rss  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+                <button class="dropdown-item " type="button" routerLink="/adminBlog">Blog</button>
+                <button class="dropdown-item  " type="button" routerLink="/pendingBlog">Pending Blog</button>
+            </div>
+        </div>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+    </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav">
+        <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+        <h4 class="name"> Bits And Byte</h4>
+        <mat-divider></mat-divider>
+
+        <a mat-button class="menu-button" routerLink="/adminDashboard">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/addStudent">
+            <mat-icon>group_add</mat-icon>
+            <span>Add Student</span>
+        </a>
+        <a mat-button class="menu-button" routerLink="/studentDetails">
+            <mat-icon>info</mat-icon>
+            <span>Student Details</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/addMaterial">
+            <mat-icon>cloud_upload</mat-icon>
+            <span>Material</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/addNotice">
+            <mat-icon>more</mat-icon>
+            <span>Notice</span>
+        </a>
+
+    </mat-sidenav>
+    <!-- Main Content -->
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            <div class="col-md-12">
+                <div class="row mt-4">
+                    <div class="col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="card l-bg-cherry">
+                            <div class="card-statistic-3 p-4">
+                                <!-- <div class="card-icon card-icon-large"><i class="fa fa-user"></i></div> -->
+                                <div class="mb-4">
+                                    <h5 class="card-title mb-0">New Students</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h2 class="d-flex align-items-center mb-0">
+                                            3,243
+                                        </h2>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <span>12.5% <i class="fa fa-arrow-up"></i></span>
+                                    </div>
+                                </div>
+                                <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                    <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card l-bg-blue-dark">
+                            <div class="card-statistic-3 p-4">
+                                <!-- <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div> -->
+                                <div class="mb-4">
+                                    <h5 class="card-title mb-0">Certified Student</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h2 class="d-flex align-items-center mb-0">
+                                            10
+                                        </h2>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <span>2.23% <i class="fa fa-arrow-up"></i></span>
+                                    </div>
+                                </div>
+                                <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                    <div class="progress-bar l-bg-green" role="progressbar" data-width="25%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card l-bg-orange-dark">
+                            <div class="card-statistic-3 p-4">
+                                <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                                <div class="mb-4">
+                                    <h5 class="card-title mb-0">Blog</h5>
+                                </div>
+                                <div class="row align-items-center mb-2 d-flex">
+                                    <div class="col-8">
+                                        <h2 class="d-flex align-items-center mb-0">
+                                            {{countBlog}}
+                                        </h2>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <span>1.50% <i class="fa fa-arrow-up"></i></span>
+                                    </div>
+                                </div>
+                                <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                    <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

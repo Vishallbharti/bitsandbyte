@@ -1,0 +1,185 @@
+<nav class="navbar navbar-dark text-white  justify-content-between   " style="background-color: #002b5c;padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+  <a class="navbar-brand ml-2"> Bits And Byte Institute of Technology</a>
+  <form class="form-inline">
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="	fa fa-book text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/addCourse">Add Course</button>
+        <button class="dropdown-item  " type="button" routerLink="/adminViewCourse">View Course</button>
+
+      </div>
+    </div>
+
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-comments  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminMessage">Student</button>
+        <button class="dropdown-item  " type="button" routerLink="/contactForm">Contact Form</button>
+      </div>
+    </div>
+
+    <div class="dropdown    ">
+      <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-rss  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminBlog">Blog</button>
+        <button class="dropdown-item  " type="button" routerLink="/pendingBlog">Pending Blog</button>
+      </div>
+    </div>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1"  type="submit" (click)="logout()">Log Out</button>
+  </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav="matSidenav">
+
+    <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+
+    <h4 class="name">Bits And Byte</h4>
+
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/adminDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addStudent">
+      <mat-icon>group_add</mat-icon>
+      <span>Add Student</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/studentDetails">
+      <mat-icon>info</mat-icon>
+      <span>Student Details</span>
+    </a>
+
+
+    <a mat-button class="menu-button" routerLink="/addMaterial">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Material</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addNotice">
+      <mat-icon>more</mat-icon>
+      <span>Notice</span>
+    </a>
+
+
+
+
+
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="content mat-elevation-z8">
+
+    <div class="content">
+
+      <nav aria-label="breadcrumb"  style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/adminDashboard">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/addMaterial">Course Material</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{course.courseName}} </li>
+        </ol>
+      </nav>
+
+      <form #materialform='ngForm' (ngSubmit)='uploadMaterial()'>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputCity">File Name</label>
+            <input type="text" class="form-control" id="inputCity" required [(ngModel)]='courseMaterial.title' name="title"
+              placeholder="File Name">
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="inputCity">Description</label>
+            <input type="text" class="form-control" id="inputCity" required [(ngModel)]="courseMaterial.description"
+              name="description" placeholder="Description">
+          </div>
+
+
+          <div class="form-group col-md-3">
+            <label for="inputZip">File</label>
+            <div class="custom-file">
+              <input type="file"  required class="custom-file-input" accept=".jpg,.jpeg,.png,.pdf" name="materialUrl"
+                (change)="onFileSelected($event)" id="customFile" >
+                {{f}}
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 mt-1">
+
+            <button class="btn btn-primary mt-4 ml-5" [disabled]="materialform.invalid" name="register" value="register">Upload</button>
+          </div>
+        </div>
+   </form>
+
+
+   <div class="table_responsive">
+  
+    <table class="table table-striped table-light table-hover"  style="font-size: 15px;font-family: 'Times New Roman', Times, serif;">
+      <thead class="thead text-white" style="background-color: #002b5c;">
+        <tr >
+          <th scope="col">ID</th>
+          <th scope="col"> Title</th>
+          <th scope="col">Description</th>
+          <th scope="col" >File Name</th>
+          <th scope="col" >Action</th>
+         
+        
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let courseList of material">
+          <td>{{courseList.attachmentId}}</td>
+          <td>{{courseList.title}}</td>
+          <td>{{courseList.description}}</td>
+          <td>{{courseList.materialName}}</td>
+          <td>
+
+            <button  class="btn btn-info mr-2 my-1" (click)="download(courseList.attachmentId)" data-bs-toggle="modal"  data-bs-target="#exampleModal"> <i class="fa fa-download mr-2  text-white" aria-hidden="true"></i>Download</button>
+        
+            <button class="btn btn-danger" (click)="delete(courseList.attachmentId)" > <i class="fa fa-trash  text-white"  aria-hidden="true"></i> Delete</button>
+        </td>
+        </tr>
+
+      
+      
+            
+        
+        
+          
+
+           
+      </tbody>
+    </table>
+
+  </div>
+
+
+
+
+
+ </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

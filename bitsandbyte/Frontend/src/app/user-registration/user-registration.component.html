@@ -1,0 +1,167 @@
+<app-home-navbar></app-home-navbar>
+
+
+
+
+<div class=" content   h-auto text-white bg-white ">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card  ">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="../../assets/images/user.jpg" class="brand_logo" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                <form #userform='ngForm' (ngSubmit)='userRegistration()'> 
+
+                    
+ <!-- name field  -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" name='name' class='form-control' [(ngModel)]='user.name' required
+                        #name='ngModel' class="form-control input_user"  placeholder="Name" 
+                        [class.is-invalid]='name.invalid && name.touched' minlength="3"
+                        pattern='^[A-Za-z\s]+$'>
+                    </div>
+        <!-- validation message  -->
+                       <div *ngIf='name.touched'>
+                        <div *ngIf='name.errors && (name.invalid)'>
+                            <small class="text-danger" *ngIf='name.errors.required'>
+                                Name is required.
+                            </small>
+                            <small class="text-danger" *ngIf='name.errors.pattern'>
+                                Name should be only alphabet and spaces.
+                            </small>
+                            <small class="text-danger" *ngIf='name.errors.minlength'>
+                                 Name should be minimum 3 character.
+                            </small>
+                        </div>
+                    </div>
+
+<!-- Email field  -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                        </div>
+                        <input type="text" name='email' class='form-control' [(ngModel)]='user.email' required
+                        #email='ngModel' class="form-control input_pass"  placeholder="Email"
+                        [class.is-invalid]='email.invalid && email.touched'
+                         pattern='^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+[a-zA-Z0-9.-]+$'>
+                    </div>
+    <!-- validation message   -->
+          <div *ngIf='email.touched'>
+            <div *ngIf='email.errors && (email.invalid)'>
+                <small class="text-danger" *ngIf='email.errors.required'>
+                    Email is required.
+                </small>
+                <small class="text-danger" *ngIf='email.errors.pattern'>
+                    Please enter valid email id (Ex. bitsandbytetech@gmail.com).
+                </small>
+            </div>
+        </div>
+                    
+
+<!-- Phone field  -->
+
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                        </div>
+                        <input type="text" name='phone' class='form-control' [(ngModel)]='user.phone' required
+                        #phone='ngModel' class="form-control input_pass"  placeholder="Phone" minlength="10" 
+                        maxlength="10"  pattern='^[0-9]*$'  [class.is-invalid]='phone.invalid && phone.touched'>
+                    </div>
+
+ <!-- validation message  -->
+
+                     <div *ngIf='phone.touched'>
+                        <div *ngIf='phone.errors && (phone.invalid)'>
+                            <small class="text-danger" *ngIf='phone.errors.required'>
+                                Phone number is required.
+                            </small>
+                            <small class="text-danger" *ngIf='phone.errors.pattern'>
+                                Phone number should be numeric.
+                            </small>
+                            <small class="text-danger" *ngIf='phone.errors.minlength || phone.errors.maxlength'>
+                                 Phone number should be of 10 digit.
+                            </small>
+                        </div>
+                    </div>
+
+
+    <!-- Username field  -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user-circle"></i></span>
+                        </div>
+                        <input type="text" name='username' class='form-control' [(ngModel)]='user.username' required
+                        #username='ngModel' class="form-control input_pass"  placeholder="Username" pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
+                        [class.is-invalid]='username.invalid && username.touched' >
+                    </div>
+  <!-- validation message   -->
+  <div *ngIf='username.touched'>
+    <div *ngIf='username.errors && (username.invalid)'>
+        <small class="text-danger" *ngIf='username.errors.required'>
+            Username is required.
+        </small>
+        <small class="text-danger" *ngIf='username.errors.pattern'>
+            <p>i. Minimum eight characters <br>
+               ii. At least one upper & lower case letter <br>
+               iii. At least one number <br>
+          
+        </small>
+    </div>
+</div>
+
+
+<!-- Password field  -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-key"></i></span>
+                        </div>
+                        <input type="password" name='password' class='form-control' [(ngModel)]='user.password' required
+                        #password='ngModel' class="form-control input_pass"  placeholder="Password"
+                        pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+                        [class.is-invalid]='password.invalid && password.touched'>
+                    </div>
+                    <!-- validation message   -->
+                    <div *ngIf='password.touched'>
+                        <div *ngIf='password.errors && (password.invalid)'>
+                            <small class="text-danger" *ngIf='password.errors.required'>
+                                Password is required.
+                            </small>
+                            <small class="text-danger" *ngIf='password.errors.pattern'>
+                                <p>i. Minimum eight characters <br>
+                                   ii. At least one upper & lower case letter <br>
+                                   iii. At least one number <br>
+                                   iv. At least one special character</p>
+                            </small>
+                        </div>
+                    </div>
+
+
+
+                  
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                 <button type="submit"  [disabled]="userform.invalid" name="register" value="register" class="btn login_btn">Sign Up</button>
+               </div>
+                </form>
+            </div>
+    
+            <div class="mt-3">
+                
+                <div class="d-flex justify-content-center links ">
+                    <a routerLink="/userLogin" class="text-dark">Click Here to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+    <app-footer ></app-footer>

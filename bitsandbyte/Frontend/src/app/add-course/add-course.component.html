@@ -1,0 +1,149 @@
+<nav class="navbar navbar-dark text-white  justify-content-between   " style="background-color: #002b5c;padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+  <form class="form-inline">
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="	fa fa-book text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/addCourse">Add Course</button>
+        <button class="dropdown-item  " type="button" routerLink="/adminViewCourse">View Course</button>
+
+      </div>
+    </div>
+
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-comments  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminMessage">Student</button>
+        <button class="dropdown-item  " type="button" routerLink="/contactForm">Contact Form</button>
+      </div>
+    </div>
+
+    <div class="dropdown    ">
+      <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-rss  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminBlog">Blog</button>
+        <button class="dropdown-item  " type="button" routerLink="/pendingBlog">Pending Blog</button>
+      </div>
+    </div>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" type="submit" (click)="logout()">Log Out</button>
+  </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+    <h4 class="name">Bits And Byte</h4>
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/adminDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addStudent">
+      <mat-icon>group_add</mat-icon>
+      <span>Add Student</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/studentDetails">
+      <mat-icon>info</mat-icon>
+      <span>Student Details</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addMaterial">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Material</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addNotice">
+      <mat-icon>more</mat-icon>
+      <span>Notice</span>
+    </a>
+
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="content mat-elevation-z8 ">
+
+    <div class="container ">
+      <div class="content">
+
+        <nav aria-label="breadcrumb"  style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/adminDashboard">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Course </li>
+          </ol>
+        </nav>
+
+        <div class="card">
+          <form #courseform='ngForm' (ngSubmit)='onSubmit()' enctype="multipart/form-data">
+            <h3 class="text-dark"></h3>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">
+                  <h3>Course Name</h3>
+                </label>
+                <input type="text" class="form-control" name="courseName" [(ngModel)]='course.courseName'
+                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Course Topic">
+              </div>
+              <div class="form-group">
+                <label for="description">
+                  <h3>Course Description</h3>
+                </label>
+                <editor name="courseDescription" [(ngModel)]="course.courseDescription" [init]="{
+              height: 300,
+              menubar: false,
+              mode : 'specific_textareas',
+              selector: 'textarea',
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor codesample',
+                'searchreplace visualblocks code fullscreen image imagetools image code',
+                'insertdatetime media table paste code help wordcount'
+              ],
+          codesample_languages: [
+          { text: 'TypeScript', value: 'typescript' },
+          { text: 'JavaScript', value: 'javascript' },
+          { text: 'HTML/XML', value: 'markup' },
+          { text: 'CSS', value: 'css' }
+        ],
+              toolbar:
+              'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | image codesample undo redo | link image | code'
+            }"></editor>
+              </div>
+
+              <div class="form-group">
+                <label for="inputLastName" class="label">Attachment</label>
+
+                <input type="file" class="form-control" name="img_url" accept=".jpg,.jpeg,.png"
+                  aria-describedby="emailHelp" (change)="onFileSelected($event)">
+              </div>
+
+              <button type="submit" class="btn btn-primary pull-right mb-3">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,90 @@
+<app-home-navbar></app-home-navbar>
+
+<div class="content  h-100 text-white bg-white ">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container">
+                    <img src="../../assets/images/user.jpg" class="brand_logo" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                <form #userform='ngForm' (ngSubmit)='userlogin()'> 
+
+                     <!-- Username field  -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" name='studentId' class='form-control' [(ngModel)]='user.username' required
+                        #username='ngModel'class="form-control input_user" pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
+                        [class.is-invalid]='username.invalid && username.touched' id="user.username" placeholder="username">
+                    </div>
+                     <!-- validation message   -->
+
+                     <div *ngIf='username.touched'>
+                        <div *ngIf='username.errors && (username.invalid)'>
+                            <small class="text-danger" *ngIf='username.errors.required'>
+                                Username is required.
+                            </small>
+                            <small class="text-danger" *ngIf='username.errors.pattern'>
+                                <p>i. Minimum eight characters <br>
+                                   ii. At least one upper & lower case letter <br>
+                                   iii. At least one number <br>
+                              
+                            </small>
+                        </div>
+                    </div>
+
+                     
+
+            <!-- Password field  -->
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-key"></i></span>
+                        </div>
+                        <input type="password" name='password' class='form-control' [(ngModel)]='user.password' required
+                        #password='ngModel' class="form-control input_pass" pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+                        [class.is-invalid]='password.invalid && password.touched' id="password" placeholder="password">
+                    </div>
+                     <!-- validation message   -->
+
+                     <div *ngIf='password.touched'>
+                        <div *ngIf='password.errors && (password.invalid)'>
+                            <small class="text-danger" *ngIf='password.errors.required'>
+                                Password is required.
+                            </small>
+                            <small class="text-danger" *ngIf='password.errors.pattern'>
+                                <p>i. Minimum eight characters <br>
+                                   ii. At least one upper & lower case letter <br>
+                                   iii. At least one number <br>
+                                   iv. At least one special character</p>
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- [disabled]="userform.invalid" -->
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                 <button type="submit"  [disabled]="userform.invalid" name="register" value="register" class="btn login_btn">Login</button>
+               </div>
+                </form>
+            </div>
+    
+            <div class="mt-4">
+                
+                <div class="d-flex justify-content-center links ">
+                    <a  class="text-dark" routerLink="/forgotUserPassword">
+                        <p style="font-size: 15px;"> Forgot your password?</p>
+                    </a>
+                </div>
+
+                <div class="d-flex justify-content-center links ">
+                    <a routerLink="/userSignUp" class="text-dark"> 
+                         <p style="font-size: 15px;">  Not a member? Signup Now</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

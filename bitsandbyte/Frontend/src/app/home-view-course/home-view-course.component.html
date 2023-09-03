@@ -1,0 +1,22 @@
+<app-home-navbar></app-home-navbar>
+
+<div class="content" style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+    <div class="card mb-3 shadow d-flex">
+        <img class="card-img-top" src="{{courseList.courseImgUrl}}" *ngIf="courseList.courseImgUrl" width="30%" height="30%"
+              class="card_img ml-3" alt="Card image cap">
+              <img class="card-img-top " src="../../assets/images/logo2.png" *ngIf="!courseList.courseImgUrl" width="30%" height="30%"
+              class="card_img ml-3" alt="Card image cap">
+        <div class="card-body">
+            <div class="card shadow d-flex mt-2">
+                <h5 class="card-header" style="font-family:'Times New Roman', Times, serif;font-size: 20px;">Course Name: <i><b>{{courseList.courseName}} </b> </i> </h5>
+                <div class="card-body">
+                    <p class="card-text" [innerHtml]="courseList.courseDescription" style="font-family:'Times New Roman', Times, serif;font-size: 18px"></p>
+                    <button class="btn btn-info" routerLink="/homeCourse">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+    <app-footer></app-footer>

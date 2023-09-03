@@ -1,0 +1,58 @@
+
+  <div class="nav_content">
+    <nav class="navbar navbar-light  " style="margin: 0px; padding: 0px;">
+        <a class="navbar-brand  "  href="#"  >
+          <img src="/assets/images/logo.png" width="120" height="60" alt="" style="margin-left: 3px;  margin: 0px;">
+        </a>
+        <form class="form-inline my-2 my-lg-0" >
+          <a  class="mr-3 btn btn-white  my-1 "   routerLink="/homepage"> Home </a> 
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/aboutus" > About Us</a>
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/homeCourse" > Courses</a>
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/blog" >Blog</a>
+         <a href="#"  class="mr-3 btn btn-white  my-1" routerLink="/homeContact"> Contact</a>
+         
+         <input  class="form-control mr-sm-2" style="width: 135px;" type="search" name="searchText" [(ngModel)]="searchText" placeholder="Search Course" aria-label="Search">   
+            <button class="btn btn-info my-sm-0 my-1 " type="submit" routerLink="/login">Login</button>
+      </form>
+      
+      </nav>
+    
+    </div>
+    <hr>
+
+
+<div class="content"  style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+
+
+  <div *ngFor='let blog of blogList  | filter : searchText'>
+    <div class="card mb-3 shadow d-flex" *ngIf='blog.approvalType === 1' style="max-width: 100%;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{blog.imgUrl}}" style="width: 100%; height: 250px;" class="card-img " alt="...">
+        </div>
+        <div class="col-md-8 l-bg-blue-dark">
+          <div class="card-body ">
+            <span><i class="fa fa-heart text-white float-right fa-2x"></i></span>
+            <h5 class="card-title text-white mb-0">By <i>{{blog.userName}}</i> </h5>
+            <h5> <i class="fa fa-star text-white mr-1 mt-0"></i>
+              <i class="fa fa-star text-white mr-1"></i>
+              <i class="fa fa-star text-white mr-1"></i>
+              <i class="fa fa-star text-white mr-1"></i>
+              <i class="fa fa-star text-white mr-1"></i>
+            </h5>
+
+            <h3 style="font-family:'Times New Roman', Times, serif;font-size: 20px;"><i>Title : </i>  {{blog.topic}}</h3>
+            <p class="card-text" [innerHtml]="blog.content"></p>
+            <p class="card-text"><small class="text-muted"> <i class="fa fa-clock-o text-success mr-2"
+                  aria-hidden="true"></i>{{blog.time}}</small></p>
+            <button class="btn btn-info text-white" (click)="view(blog.blogId)">Read More ..</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <app-footer></app-footer>
+</div>

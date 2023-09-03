@@ -1,0 +1,88 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #002b5c; padding: 2px; ">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+  <form class="form-inline">
+
+
+    <a class="btn mr-1" type="button" routerLink="/studentBlog" id="dropdownMenu2" data-toggle="dropdown">
+      <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i>
+    </a>
+
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+  </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+
+    <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+
+
+    <h4 class="name" style="font-family:'Times New Roman', Times, serif;font-size: 19px;">{{studentList.studentName}}</h4>
+
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/studentDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/studentProfile">
+      <mat-icon>person</mat-icon>
+      <span >My Profile</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/message">
+      <mat-icon>message</mat-icon>
+      <span>Message</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/studentCourse">
+      <mat-icon>file_copy</mat-icon>
+      <span>Courses</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/studentMaterial">
+      <mat-icon>more</mat-icon>
+      <span>View Material</span>
+    </a>
+
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="content mat-elevation-z8">
+    <div class="content" style="font-family:'Times New Roman', Times, serif;font-size: 20px;">
+      <div class="card mb-3 shadow d-flex">
+        <img src="../../assets/images/alok.jpg" alt="..." height="30%" width="30%" class="ml-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <p
+              style="font-family:'Times New Roman', Times, serif;font-size: 20px;">
+                <i class="fa fa-user-secret mr-2 text-danger" aria-hidden></i>  <i>{{blogList.userName}}</i>
+              </p>
+            </div>
+          </div>
+          <div class="card shadow d-flex ">
+            <h5 class="card-header" style="font-family:'Times New Roman', Times, serif;font-size: 20px;" > <i>Title : </i> <b>{{blogList.topic}}</b></h5>
+            <div class="card-body">
+              <p class="card-text" [innerHtml]="blogList.content" style="font-size: 18px"></p>
+              <p class="card-text"><small class="text-muted"> <i class="fa fa-clock-o text-success mr-2"
+                aria-hidden="true"></i> {{blogList.time}}</small></p>
+              <button class="btn btn-info" routerLink="/studentBlog">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

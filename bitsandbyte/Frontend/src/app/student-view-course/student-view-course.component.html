@@ -1,0 +1,77 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #002b5c; padding: 2px; ">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <a class="navbar-brand ml-3"> Bits And Byte Institute of Technology</a>
+    <form class="form-inline">
+
+        <a class="btn mr-1" type="button" routerLink="/studentBlog" id="dropdownMenu2" data-toggle="dropdown">
+            <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i>
+        </a>
+
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+    </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+        <h4 class="name">{{studentList.studentName}}</h4>
+        <mat-divider></mat-divider>
+        <a mat-button class="menu-button" routerLink="/studentDashboard">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentProfile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+        </a>
+        <a mat-button class="menu-button" routerLink="/message">
+            <mat-icon>message</mat-icon>
+            <span>Message</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentCourse">
+            <mat-icon>file_copy</mat-icon>
+            <span>Courses</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentMaterial">
+            <mat-icon>more</mat-icon>
+            <span>View Material</span>
+        </a>
+
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content class="content mat-elevation-z8">
+            <div class="content" style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+                <div class="card mb-3 shadow d-flex">
+                    <!-- <img src="../../assets/images/alok.jpg" alt="..." height="30%" width="30%" class="ml-4"> -->
+                    <img class="card-img-top" src="{{courseList.courseImgUrl}}" *ngIf="courseList.courseImgUrl"  height="30%" width="30%" class="card_img ml-3" alt="Card image cap">
+                  <img class="card-img-top" src="../../assets/images/logo2.png" *ngIf="!courseList.courseImgUrl"  height="30%" width="30%" class="card_img ml-3" alt="Card image cap">
+                  
+                  
+                    <div class="card-body">
+                        <div class="card shadow d-flex mt-2">
+                            <h5 class="card-header" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> <b>{{courseList.courseName}} </b> </h5>
+                            <div class="card-body">
+                                <p class="card-text" [innerHtml]="courseList.courseDescription" 
+                                style="font-family:'Times New Roman', Times, serif;font-size: 18px;"></p>
+                                <button class="btn btn-info" routerLink="/studentCourse">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

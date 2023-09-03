@@ -1,0 +1,55 @@
+<!-- <app-home-navbar></app-home-navbar> -->
+<div class="nav_content">
+    <nav class="navbar navbar-light  " style="margin: 0px; padding: 0px;">
+        <a class="navbar-brand  "  href="#"  >
+          <img src="/assets/images/logo.png" width="120" height="60" alt="" style="margin-left: 3px;  margin: 0px;">
+        </a>
+        <form class="form-inline my-2 my-lg-0" >
+          <a  class="mr-3 btn btn-white  my-1 "   routerLink="/homepage"> Home </a> 
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/aboutus" > About Us</a>
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/homeCourse" > Courses</a>
+          <a   class="mr-3 btn btn-white  my-1" routerLink="/blog" >Blog</a>
+         <a href="#"  class="mr-3 btn btn-white  my-1" routerLink="/homeContact"> Contact</a>
+         
+         <input  class="form-control mr-sm-2" style="width: 135px;" type="search" name="searchText" [(ngModel)]="searchText" placeholder="Search Course" aria-label="Search">
+         
+            <button class="btn btn-info my-sm-0 my-1 " type="submit" routerLink="/login">Login</button>
+         
+        
+        
+    
+      </form>
+      
+      </nav>
+    
+    </div>
+    <hr>
+<div class="content" style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+
+
+
+<div class="row  ">
+    <!--  -->
+  
+    <div class="col-lg-4 col-md-4 col-sm-12 my-1 " *ngFor="let course of courseList  | filter : searchText">
+      <div class="card shadow d-flex flex-column" >
+          <img class="card-img-top" src="{{course.courseImgUrl}}" *ngIf="course.courseImgUrl" width="100%" height="200px"
+              class="card_img" alt="Card image cap">
+              <img class="card-img-top" src="../../assets/images/logo2.png" *ngIf="!course.courseImgUrl" width="100%" height="200px"
+              class="card_img" alt="Card image cap">
+          <div class="card-body l-bg-blue-dark">
+              <h5 class="card-title" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> {{course.courseName}}</h5>
+              <p class="card-text" style=" text-overflow: ellipsis;   overflow: hidden;white-space: nowrap;" [innerHtml]="course.courseDescription" >
+                 </p>
+              <a  class="btn btn-info" (click)="viewCourse(course.id)">Read More..</a>
+          </div>
+      </div>
+    </div>
+    
+    
+    </div>
+
+</div>  
+    
+
+    <app-footer></app-footer>

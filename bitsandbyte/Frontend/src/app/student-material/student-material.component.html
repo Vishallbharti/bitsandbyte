@@ -1,0 +1,84 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #002b5c; padding: 2px; ">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+          menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+          close
+      </mat-icon>
+  </button>
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+  <form class="form-inline">
+
+   
+          <a class="btn mr-1" type="button" routerLink="/studentBlog" id="dropdownMenu2" data-toggle="dropdown" >
+               <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i> 
+          </a>
+     
+
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+  </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav">
+
+        <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+
+        <h4 class="name" style="font-family:'Times New Roman', Times, serif;">{{student.studentName}}</h4>
+
+        <mat-divider></mat-divider>
+
+        <a mat-button class="menu-button"  routerLink="/studentDashboard">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentProfile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+        </a>
+        <a mat-button class="menu-button" routerLink="/message">
+            <mat-icon>message</mat-icon>
+            <span>Message</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentCourse">
+          <mat-icon>file_copy</mat-icon>
+          <span>Courses</span>
+      </a>
+
+        <a mat-button class="menu-button" routerLink="/studentMaterial">
+            <mat-icon>more</mat-icon>
+            <span>View Material</span>
+        </a>
+
+
+
+    </mat-sidenav>
+
+    <!-- Main Content -->
+    <mat-sidenav-content class="content mat-elevation-z8 ">
+        <!-- <div class="content mat-elevation-z8"> -->
+        
+            <div class="content  " >
+                <nav aria-label="breadcrumb" style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a routerLink="/studentDashboard">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Course Material</li>
+              
+                    </ol>
+                  </nav>
+             
+                <div class="row ">
+                <div class="col-lg-4 col-md-6 col-sm-6 my-1" style="font-family:'Times New Roman', Times, serif;font-size: 20px;" *ngFor="let course of courseList ">
+                    <button class="glow-on-hover" (click)="viewCourse(course.id)" type="button"style="font-family:'Times New Roman', Times, serif;font-size: 22px;height: 90px;" >{{course.courseName}}</button>
+                </div>
+            </div>
+
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

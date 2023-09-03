@@ -1,0 +1,679 @@
+<nav class="navbar navbar-dark text-white  justify-content-between   " style="background-color: #002b5c;padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+  <form class="form-inline">
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="	fa fa-book text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/addCourse">Add Course</button>
+        <button class="dropdown-item  " type="button" routerLink="/adminViewCourse">View Course</button>
+
+      </div>
+    </div>
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-comments  text-white" style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminMessage">Student</button>
+        <button class="dropdown-item  " type="button" routerLink="/contactForm">Contact Form</button>
+      </div>
+    </div>
+
+    <div class="dropdown    ">
+      <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-rss  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminBlog">Blog</button>
+        <button class="dropdown-item  " type="button" routerLink="/pendingBlog">Pending Blog</button>
+      </div>
+    </div>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+  </form>
+</nav>
+
+<!-- Side Nav Bar -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+    <h4 class="name">Bits And Byte</h4>
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/adminDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addStudent">
+      <mat-icon>group_add</mat-icon>
+      <span>Add Student</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/studentDetails">
+      <mat-icon>info</mat-icon>
+      <span>Student Details</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addMaterial">
+      <mat-icon>cloud_upload</mat-icon>
+      <span> Material</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/addNotice">
+      <mat-icon>more</mat-icon>
+      <span>Notice</span>
+    </a>
+
+  </mat-sidenav>
+  <!-- Main Content Here -->
+
+  <mat-sidenav-content class="content mat-elevation-z8 ">
+    <!-- <div class="content mat-elevation-z8"> -->
+
+    <div class="content " >
+      <nav aria-label="breadcrumb"  style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/adminDashboard">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add Student</li>
+        </ol>
+      </nav>
+
+      <form #userform='ngForm' (ngSubmit)='submit()'  style="font-size: 18px;font-family: 'Times New Roman', Times, serif;">
+
+        <!-- pic -->
+
+        <div class="form-row float-right">
+          <div class="form-group col-md-3">
+            <div style="text-align:center">
+              <label for="image" *ngIf="!url" class=" p_img text-white rounded-circle bg-dark"
+                style="width: 250px; height: 250px;"></label>
+
+              <div [innerHtml]='msg' *ngIf="msg" style="color: red;"></div>
+              <div><img [src]="url" *ngIf="url" width="250px" height="250px" class="rounded-circle p_img"></div>
+
+              <span>
+                <input type="file" (change)="selectFile($event)">
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Student Serial Number Field  -->
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.studentSr' required #studentSr='ngModel' id="studentSr"
+              name="studentSr" class="form-control" placeholder="Student ID" pattern='^[0-9]{2}[B][A][B][0-9]{4}$'
+              [class.is-invalid]='studentSr.invalid && studentSr.touched'>
+
+            <!-- validation message   -->
+            <div *ngIf='studentSr.touched'>
+              <div *ngIf='studentSr.errors && (studentSr.invalid)'>
+                <small class="text-danger" *ngIf='studentSr.errors.required'>
+                  Username is required.
+                </small>
+                <small class="text-danger" *ngIf='studentSr.errors.pattern'>
+                  Username should be like 22BAB0001.
+                </small>
+                <small class="text-danger" *ngIf='studentSr.errors.minlength'>
+                  Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- name field  -->
+
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.studentName' required #studentName='ngModel' id="studentName"
+              name="studentName" class="form-control" placeholder="Name"
+              [class.is-invalid]='studentName.invalid && studentName.touched' minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='studentName.touched'>
+              <div *ngIf='studentName.errors && (studentName.invalid)'>
+                <small class="text-danger" *ngIf='studentName.errors.required'>
+                  Name is required.
+                </small>
+                <small class="text-danger" *ngIf='studentName.errors.pattern'>
+                  Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='studentName.errors.minlength'>
+                  Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Father Name field  -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.fatherName' required #fatherName='ngModel' id="fatherName"
+              name="fatherName" class="form-control" placeholder="Father's Name"
+              [class.is-invalid]='fatherName.invalid && fatherName.touched' minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='fatherName.touched'>
+              <div *ngIf='fatherName.errors && (fatherName.invalid)'>
+                <small class="text-danger" *ngIf='fatherName.errors.required'>
+                  Father Name is required.
+                </small>
+                <small class="text-danger" *ngIf='fatherName.errors.pattern'>
+                  Father Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='fatherName.errors.minlength'>
+                  Father Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mother Name field  -->
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.motherName' required #motherName='ngModel' id="motherName"
+              name="motherName" class="form-control" placeholder="Mother's Name"
+              [class.is-invalid]='motherName.invalid && motherName.touched' minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='motherName.touched'>
+              <div *ngIf='motherName.errors && (motherName.invalid)'>
+                <small class="text-danger" *ngIf='motherName.errors.required'>
+                  Mother Name is required.
+                </small>
+                <small class="text-danger" *ngIf='motherName.errors.pattern'>
+                  Mother Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='motherName.errors.minlength'>
+                  Mother Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!--  -->
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                Gender
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                <input type="radio" class="form-check-input" [(ngModel)]='student.gender' required #gender='ngModel'
+                  id="male" name="gender" value="male" checked>Male
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group ml-5">
+            <div class="form-check">
+              <label class="form-check-label" for="radio1">
+                <input type="radio" class="form-check-input" [(ngModel)]='student.gender' required #gender='ngModel'
+                  id="female" name="gender" value="female">Female
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row ">
+
+          <!-- Phone field  -->
+
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.mobile' required #mobile='ngModel' id="mobile" name="mobile"
+              class="form-control" placeholder="Phone Number" minlength="10" maxlength="10" pattern='^[0-9]*$'
+              [class.is-invalid]='mobile.invalid && mobile.touched'>
+            <!-- validation message  -->
+
+            <div *ngIf='mobile.touched'>
+              <div *ngIf='mobile.errors && (mobile.invalid)'>
+                <small class="text-danger" *ngIf='mobile.errors.required'>
+                  Phone number is required.
+                </small>
+                <small class="text-danger" *ngIf='mobile.errors.pattern'>
+                  Phone number should be numeric.
+                </small>
+                <small class="text-danger" *ngIf='mobile.errors.minlength || mobile.errors.maxlength'>
+                  Phone number should be of 10 digit.
+                </small>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.guardianMobile' required #guardianMobile='ngModel'
+              id="guardianMobile" name="guardianMobile" class="form-control" placeholder="Parent Phone" minlength="10"
+              maxlength="10" pattern='^[0-9]*$' [class.is-invalid]='guardianMobile.invalid && guardianMobile.touched'>
+            <!-- validation message  -->
+
+            <div *ngIf='guardianMobile.touched'>
+              <div *ngIf='guardianMobile.errors && (guardianMobile.invalid)'>
+                <small class="text-danger" *ngIf='guardianMobile.errors.required'>
+                  Parent Phone number is required.
+                </small>
+                <small class="text-danger" *ngIf='guardianMobile.errors.pattern'>
+                  Parent Phone number should be numeric.
+                </small>
+                <small class="text-danger" *ngIf='guardianMobile.errors.minlength || guardianMobile.errors.maxlength'>
+                  Parent Phone number should be of 10 digit.
+                </small>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="form-row ">
+
+          <!-- Email field  -->
+          <div class="form-group col-md-6">
+            <input type="email" [(ngModel)]='student.email' required #email='ngModel' id="email" name="email"
+              class="form-control" placeholder="Email" [class.is-invalid]='email.invalid && email.touched'
+              pattern='^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+[.]+[a-zA-Z0-9.-]+$'>
+
+            <!-- validation message   -->
+            <div *ngIf='email.touched'>
+              <div *ngIf='email.errors && (email.invalid)'>
+                <small class="text-danger" *ngIf='email.errors.required'>
+                  Email is required.
+                </small>
+                <small class="text-danger" *ngIf='email.errors.pattern'>
+                  Please enter valid email id (Ex. bitsandbytetech@gmail.com).
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.blood' required #blood='ngModel' id="blood" name="blood"
+              class="form-control" placeholder="Blood Group" [class.is-invalid]='blood.invalid && blood.touched'
+              minlength="1">
+
+            <!-- validation message  -->
+            <div *ngIf='blood.touched'>
+              <div *ngIf='blood.errors && (blood.invalid)'>
+                <small class="text-danger" *ngIf='blood.errors.required'>
+                  Blood Group is required.
+                </small>
+
+                <small class="text-danger" *ngIf='blood.errors.minlength'>
+                  Blood Group should be minimum 1 character.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" [(ngModel)]='student.password' required #password='ngModel' id="password" name="password"
+              class="form-control" placeholder="Password"
+              pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
+              [class.is-invalid]='password.invalid && password.touched'>
+
+            <!-- validation message   -->
+
+            <div *ngIf='password.touched'>
+              <div *ngIf='password.errors && (password.invalid)'>
+                <small class="text-danger" *ngIf='password.errors.required'>
+                  Password is required.
+                </small>
+                <small class="text-danger" *ngIf='password.errors.pattern'>
+                  <p>i. Minimum eight characters <br>
+                    ii. At least one upper & lower case letter <br>
+                    iii. At least one number <br>
+                    iv. At least one special character</p>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Address -->
+        <label for="Current Address ">
+          <h2 class="ml-1">Current Address</h2>
+        </label>
+        <div class="form-row ">
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='currAddress.houseNumber' required
+              #currentHouseNumber='ngModel' id="houseNumber" name="houseNumber" placeholder="House Number"
+              [class.is-invalid]='currentHouseNumber.invalid && currentHouseNumber.touched' minlength="3"
+              pattern='^(0|[1-9][0-9]*)$'>
+
+
+            <!-- validation message  -->
+            <div *ngIf='currentHouseNumber.touched'>
+              <div *ngIf='currentHouseNumber.errors && (currentHouseNumber.invalid)'>
+                <small class="text-danger" *ngIf='currentHouseNumber.errors.required'>
+                  House Number is required.
+                </small>
+                <small class="text-danger" *ngIf='currentHouseNumber.errors.pattern'>
+                  House Number should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentHouseNumber.errors.minlength'>
+                  House Number should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.streetAddress' required
+              #currentStreetAddress='ngModel' id="streetAddress1" name="streetAddress1" placeholder="Street Address"
+              [class.is-invalid]='currentStreetAddress.invalid && currentStreetAddress.touched' minlength="3"
+              pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='currentStreetAddress.touched'>
+              <div *ngIf='currentStreetAddress.errors && (currentStreetAddress.invalid)'>
+                <small class="text-danger" *ngIf='currentStreetAddress.errors.required'>
+                  Street Address is required.
+                </small>
+                <small class="text-danger" *ngIf='currentStreetAddress.errors.pattern'>
+                  Street Address should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentStreetAddress.errors.minlength'>
+                  Street Address should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.city' required #currentCity='ngModel'
+              id="city  " name="city" placeholder="City "
+              [class.is-invalid]='currentCity.invalid && currentCity.touched' minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='currentCity.touched'>
+              <div *ngIf='currentCity.errors && (currentCity.invalid)'>
+                <small class="text-danger" *ngIf='currentCity.errors.required'>
+                  Current City is required.
+                </small>
+                <small class="text-danger" *ngIf='currentCity.errors.pattern'>
+                  Current City should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentCity.errors.minlength'>
+                  Current City should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.state' required #currentState='ngModel'
+              id="state  " name="state" placeholder="State"
+              [class.is-invalid]='currentState.invalid && currentState.touched' minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='currentState.touched'>
+              <div *ngIf='currentState.errors && (currentState.invalid)'>
+                <small class="text-danger" *ngIf='currentState.errors.required'>
+                  Current State is required.
+                </small>
+                <small class="text-danger" *ngIf='currentState.errors.pattern'>
+                  Current State should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentState.errors.minlength'>
+                  Current State should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.zipCode' required
+              #currentZipCode='ngModel' id="zipCode  " name="zipCode" placeholder="Zip Code"
+              [class.is-invalid]='currentZipCode.invalid && currentZipCode.touched' maxlength="6"
+              pattern='^(0|[1-9][0-9]*)$'>
+
+            <!-- validation message  -->
+            <div *ngIf='currentZipCode.touched'>
+              <div *ngIf='currentZipCode.errors && (currentZipCode.invalid)'>
+                <small class="text-danger" *ngIf='currentZipCode.errors.required'>
+                  Zip Code is required.
+                </small>
+                <small class="text-danger" *ngIf='currentZipCode.errors.pattern'>
+                  Zip Code should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentZipCode.errors.maxlength'>
+                  Zip Code should be maximum of 6 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='currAddress.country' required #currentCountry='ngModel'
+              id="country  " name="country" placeholder="Country"
+              [class.is-invalid]='currentCountry.invalid && currentCountry.touched' minlength="3"
+              pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='currentCountry.touched'>
+              <div *ngIf='currentCountry.errors && (currentCountry.invalid)'>
+                <small class="text-danger" *ngIf='currentCountry.errors.required'>
+                  Country Name is required.
+                </small>
+                <small class="text-danger" *ngIf='currentCountry.errors.pattern'>
+                  Country Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='currentCountry.errors.minlength'>
+                  Country Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Permanent Address -->
+        <label for="Permanent Address ">
+          <h2>Permanent Address</h2>
+        </label>
+        <div class="form-row ">
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="number" class="form-control" [(ngModel)]='perAddress.houseNumber' required
+              #perHouseNumber='ngModel' id="houseNumber" name="houseNumber " placeholder="House Number"
+              [class.is-invalid]='perHouseNumber.invalid && perHouseNumber.touched' minlength="3"
+              pattern='^(0|[1-9][0-9]*)$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perHouseNumber.touched'>
+              <div *ngIf='perHouseNumber.errors && (perHouseNumber.invalid)'>
+                <small class="text-danger" *ngIf='perHouseNumber.errors.required'>
+                  House Number is required.
+                </small>
+                <small class="text-danger" *ngIf='perHouseNumber.errors.pattern'>
+                  House Number should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perHouseNumber.errors.minlength'>
+                  House Number should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.streetAddress' required
+              #perStreetAddress='ngModel' id="streetAddress" name="streetAddress" placeholder="Street"
+              [class.is-invalid]='perStreetAddress.invalid && perStreetAddress.touched' minlength="3"
+              pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perStreetAddress.touched'>
+              <div *ngIf='perStreetAddress.errors && (perStreetAddress.invalid)'>
+                <small class="text-danger" *ngIf='perStreetAddress.errors.required'>
+                  Street Address is required.
+                </small>
+                <small class="text-danger" *ngIf='perStreetAddress.errors.pattern'>
+                  Street Address should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perStreetAddress.errors.minlength'>
+                  Street Address should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.city' required #perCity='ngModel' id="city"
+              name="city" placeholder="City " [class.is-invalid]='perCity.invalid && perCity.touched' minlength="3"
+              pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perCity.touched'>
+              <div *ngIf='perCity.errors && (perCity.invalid)'>
+                <small class="text-danger" *ngIf='perCity.errors.required'>
+                  Current City is required.
+                </small>
+                <small class="text-danger" *ngIf='perCity.errors.pattern'>
+                  Current City should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perCity.errors.minlength'>
+                  Current City should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.state' required #perState='ngModel'
+              id="state" name="state" placeholder="State " [class.is-invalid]='perState.invalid && perState.touched'
+              minlength="3" pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perState.touched'>
+              <div *ngIf='perState.errors && (perState.invalid)'>
+                <small class="text-danger" *ngIf='perState.errors.required'>
+                  Permanent State is required.
+                </small>
+                <small class="text-danger" *ngIf='perState.errors.pattern'>
+                  Permanent State should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perState.errors.minlength'>
+                  Permanent State should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.zipCode' required #perZipCode='ngModel'
+              id="zipCode" name="zipCode" placeholder="Zip Code"
+              [class.is-invalid]='perZipCode.invalid && perZipCode.touched' maxlength="6" pattern='^(0|[1-9][0-9]*)$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perZipCode.touched'>
+              <div *ngIf='perZipCode.errors && (perZipCode.invalid)'>
+                <small class="text-danger" *ngIf='perZipCode.errors.required'>
+                  Zip Code is required.
+                </small>
+                <small class="text-danger" *ngIf='perZipCode.errors.pattern'>
+                  Zip Code should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perZipCode.errors.maxlength'>
+                  Zip Code should be maximum of 6 character.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3 col-lg-6">
+            <input type="text" class="form-control" [(ngModel)]='perAddress.country' required #perCountry='ngModel'
+              id="country" name="country" placeholder="Country"
+              [class.is-invalid]='perCountry.invalid && perCountry.touched' minlength="3"  pattern='^[A-Za-z\s]+$'>
+
+            <!-- validation message  -->
+            <div *ngIf='perCountry.touched'>
+              <div *ngIf='perCountry.errors && (perCountry.invalid)'>
+                <small class="text-danger" *ngIf='perCountry.errors.required'>
+                  Country Name is required.
+                </small>
+                <small class="text-danger" *ngIf='perCountry.errors.pattern'>
+                  Country Name should be only alphabet and spaces.
+                </small>
+                <small class="text-danger" *ngIf='perCountry.errors.minlength'>
+                  Country Name should be minimum 3 character.
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row ">
+          <div class="form-group col-md-3">
+
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <select matNativeControl required [(ngModel)]='student.status' id="status" required #status='ngModel'
+                name="status" class="form-control" [class.is-invalid]='status.invalid && status.touched'>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Completed">Completed</option>
+                <option value="Hold">Hold</option>
+                <option value="Left">Left</option>
+              </select>
+            </mat-form-field>
+
+            <!-- validation message  -->
+            <div *ngIf='status.touched'>
+              <div *ngIf='status.errors && (status.invalid)'>
+                <small class="text-danger" *ngIf='status.errors.required'>
+                  Status is required.
+                </small>
+
+              </div>
+            </div>
+          </div>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]='student.birthDay' required #birthDay='ngModel'
+              id="birthDay" name="birthDay" class="form-control">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <!--Certificate  -->
+          <div class="form-group">
+            <label for="inputLastName" class="label">Certificate</label>
+
+            <input type="file" class="form-control" name="img_url" accept=".jpg,.jpeg,.png" aria-describedby="emailHelp"
+              (change)="onFileSelected($event)">
+          </div>
+
+        </div>
+
+        <button type="submit" [disabled]="userform.invalid" name="register" value="Register" class="btn btn-primary center my-3">Submit</button>
+      </form>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

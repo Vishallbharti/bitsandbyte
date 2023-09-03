@@ -1,0 +1,99 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #002b5c; padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+  <form class="form-inline">
+
+    <a class="btn mr-1" type="button" routerLink="/userBlog" id="dropdownMenu2" data-toggle="dropdown">
+      <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i>
+    </a>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+  </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+    <h4 class="name">{{user.name}}</h4>
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/userDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/userProfile">
+      <mat-icon>person</mat-icon>
+      <span>My Profile</span>
+    </a>
+    <a mat-button class="menu-button" routerLink="/userBlog">
+      <mat-icon>view_carousel</mat-icon>
+      <span>Blog</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/createBlog">
+      <mat-icon>create</mat-icon>
+      <span>Create Blog</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/userPendingBlog">
+      <mat-icon> near_me</mat-icon>
+      <span>Pending Blog</span>
+    </a>
+
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="content mat-elevation-z8">
+    <div class="content">
+
+      <nav aria-label="breadcrumb" style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/userDashboard">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/userBlog">Blog</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{blogList.topic}}</li>
+        </ol>
+      </nav>
+
+      <div class="card mb-3 shadow d-flex">
+        <!-- <img src="../../assets/images/alok.jpg" alt="..." height="30%" width="30%" class="ml-4"> -->
+
+        <img class="card-img-top" src="{{blogList.imgUrl}}" *ngIf="blogList.imgUrl" height="30%" width="30%" class="card_img ml-4" alt="Card image cap">
+      <img class="card-img-top" src="../../assets/images/logo2.png" *ngIf="!blogList.imgUrl" height="30%" width="30%" class="card_img ml-4" alt="Card image cap">
+        
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <p
+              style="font-family:'Times New Roman', Times, serif;font-size: 20px;">
+                <i class="fa fa-user-secret mr-2 text-danger" aria-hidden></i> <i>  {{blogList.userName}}</i>
+              </p>
+            </div>
+          </div>
+          <div class="card shadow d-flex ">
+            <h5 class="card-header" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> <i>Title : </i> <b>{{blogList.topic}}</b> </h5>
+            <div class="card-body">
+              <p class="card-text" style="font-family:'Times New Roman', Times, serif;font-size: 18px;" [innerHtml]="blogList.content" ></p>
+              <p class="card-text"><small class="text-muted"> <i class="fa fa-clock-o text-success mr-2"
+                aria-hidden="true"></i> {{blogList.time}}</small></p>
+              <button class="btn btn-info" routerLink="/userBlog">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

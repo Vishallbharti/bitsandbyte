@@ -1,0 +1,317 @@
+<nav class="navbar navbar-dark text-white  justify-content-between   " style="background-color: #002b5c;padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+  <form class="form-inline">
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="	fa fa-book text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/addCourse">Add Course</button>
+        <button class="dropdown-item  " type="button" routerLink="/adminViewCourse">View Course</button>
+
+      </div>
+    </div>
+
+    <div class="dropdown ">
+      <a class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-comments  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminMessage">Student</button>
+        <button class="dropdown-item  " type="button" routerLink="/contactForm">Contact Form</button>
+      </div>
+    </div>
+
+    <div class="dropdown    ">
+      <a class="btn  " type="button" id="dropdownMenu2" data-toggle="dropdown">
+        <i class="fa fa-rss  text-white " style="font-size: 25px;" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu  " aria-labelledby="dropdownMenu2 ">
+        <button class="dropdown-item " type="button" routerLink="/adminBlog">Blog</button>
+        <button class="dropdown-item  " type="button" routerLink="/pendingBlog">Pending Blog</button>
+      </div>
+    </div>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+  </form>
+</nav>
+
+<!-- Side Nav Bar -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+
+    <img class="avatar mat-elevation-z8" src="../../assets/images/logo1.png" />
+    <h4 class="name">Bits And Byte</h4>
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/adminDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addStudent">
+      <mat-icon>group_add</mat-icon>
+      <span>Add Student</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/studentDetails">
+      <mat-icon>info</mat-icon>
+      <span>Student Details</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addMaterial">
+      <mat-icon>cloud_upload</mat-icon>
+      <span>Material</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/addNotice">
+      <mat-icon>more</mat-icon>
+      <span>Notice</span>
+    </a>
+
+  </mat-sidenav>
+  <!-- Main Content Here -->
+
+  <mat-sidenav-content class="content mat-elevation-z8 ">
+    <!-- <div class="content mat-elevation-z8"> -->
+
+    <div class="content "  style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+      <nav aria-label="breadcrumb"  style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/adminDashboard">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Student Details</li>
+        </ol>
+      </nav>
+
+      <div class="table_responsive">
+        <table class="table table-striped table-light table-hover " style="font-family:'Times New Roman', Times, serif;font-size: 15px;">
+          <thead>
+            <tr >
+              <th>S. No.</th>
+              <th scope="col" >Student ID</th>
+              <th scope="col" >Name</th>
+     
+              <th scope="col" >Email</th>
+      
+              <th scope="col" >Mobile</th>
+      
+              <th scope="col" >Status</th>
+              <th scope="col" >Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of studentList; let i = index">
+
+              <td >{{i+1}}</td>
+              <td class="text-danger"> <b>{{student.studentSr}}</b> </td>
+              <td>{{student.studentName}}</td>
+  
+              <td>{{student.email}}</td>
+  
+              <td>{{student.mobile}}</td>
+            
+              <td>{{student.status}}</td>
+              <td>
+                <button class="btn btn-info" data-bs-toggle="modal" (click)="editStudent(student.id)"
+                  data-bs-target="#exampleModal"><i class="fa fa-edit   text-white" aria-hidden="true"></i>
+                  Edit</button>
+                <button class="btn btn-success ml-2" (click)="openLg(content,student)"> <i class="fa fa-eye  text-white"
+                    aria-hidden="true"></i> View</button>
+                <button class="btn btn-danger ml-2" (click)="deleteStudent(student.id)"> <i class="fa fa-trash  text-white" aria-hidden="true"></i>
+                  Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!--  -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+
+        <button class="btn btn-dark float-center"
+          style="  background: linear-gradient(to right, #373b44, #4286f4) !important; height: 40px;">Student
+          Information</button>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <!--  -->
+          <div class="form-row float-right ml-3">
+            <div class="form-group col-md-3">
+              <div style="text-align:center">
+                <div><img src="../../assets/images/alok.jpg" width="250px" height="250px" class=" p_img"></div>
+              </div>
+            </div>
+          </div>
+
+          <!--  -->
+          <div class="form-row">
+           
+            <div class="form-group col-md-6">
+              <p class="modal_text">Student ID: </p>
+              <input type="text" readonly class="form-control" id="studentSr">
+            </div>
+            <div class="form-group col-md-6">
+              <p class="modal_text"> Student Name</p>
+              <input id="studentName" class="form-control" readonly>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <p class="modal_text">Father's Name</p>
+              <input id="fatherName" class="form-control" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <p class="modal_text">Mother's Name</p>
+              <input id="motherName" class="form-control" readonly>
+            </div>
+          </div>
+
+          <!--  -->
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <p class="modal_text">Gender</p>
+              <input id="gender" class="form-control" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <p class="modal_text">Date of Birth</p>
+              <input id="birthDay" class="form-control" readonly>
+            </div>
+          </div>
+
+          <div class="form-row ">
+            <div class="form-group col-md-6">
+              <p class="modal_text">Phone Number</p>
+              <input id="mobile" class="form-control" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <p class="modal_text">Parent Number</p>
+              <input id="guardianMobile" class="form-control" readonly>
+            </div>
+
+          </div>
+
+          <div class="form-row ">
+            <div class="form-group col-md-4">
+              <p class="modal_text">Email</p>
+              <input id="email" class="form-control" readonly>
+            </div>
+
+            <div class="form-group col-md-4">
+              <p class="modal_text">Blood Group</p>
+              <input id="blood" class="form-control" readonly>
+            </div> 
+
+            <div class="form-group col-md-4">
+              <p class="modal_text">Status</p>
+              <input id="status" class="form-control" readonly>
+            </div>
+
+          </div>
+
+        
+
+          <!--  -->
+
+          
+        <div *ngFor="let address of addressList; let i = index">
+
+          <label for=" Address ">
+            <h2 class="ml-1 text-success">Address Line {{i+1}}</h2>
+          </label>
+          <div class="form-row ">
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> House Number</label>
+              <input class="form-control" [(ngModel)]='addressList[i].houseNumber' readonly
+                name="addressList.{{i}}.houseNumber">
+            </div>
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> Street Address</label>
+              <input class="form-control" [(ngModel)]='addressList[i].streetAddress' readonly
+                name="addressList.{{i}}.streetAddress">
+            </div>
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> City</label>
+              <input class="form-control" [(ngModel)]='addressList[i].city' readonly name="addressList.{{i}}.city">
+            </div>
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> State</label>
+              <input class="form-control" [(ngModel)]='addressList[i].state' readonly name="addressList.{{i}}.state">
+            </div>
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> Zip Code</label>
+              <input class="form-control" [(ngModel)]='addressList[i].zipCode' readonly
+                name="addressList.{{i}}.zipCode">
+            </div>
+
+            <div class="form-group col-md-3 col-lg-6">
+              <label for="id" class="text-danger"> Country</label>
+              <input class="form-control" [(ngModel)]='addressList[i].country' readonly
+                name="addressList.{{i}}.country">
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="table_responsive mt-3" >
+          <table class="table table-striped table-light table-hover " style="font-family:'Times New Roman', Times, serif;font-size: 15px;">
+            <thead>
+              <tr>
+                <th scope="col" style="font-family:'Times New Roman', Times, serif;font-size: 18px;">Courses</th>
+                
+              </tr>
+            </thead>
+            <tbody>  
+              <tr *ngFor="let course of studentCourse">
+                <td class="text-danger" > <b>{{course.courseName}}</b> </td>  
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+          <!--  -->
+
+
+        
+
+            
+
+         
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+      </div>
+    </ng-template>
+
+    <!-- <button class="btn btn-outline-primary mb-2 me-2" (click)="openLg(content)">Large modal</button> -->
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

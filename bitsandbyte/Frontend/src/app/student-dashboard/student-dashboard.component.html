@@ -1,0 +1,214 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: #002b5c; padding: 2px; ">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+    <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte
+        Institute of Technology</a>
+
+
+    <form class="form-inline">
+
+        <a class="btn mr-1" type="button" routerLink="/studentBlog" id="dropdownMenu2" data-toggle="dropdown">
+            <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i>
+        </a>
+
+        <input class="form-control mr-sm-2" type="search" name="searchText" [(ngModel)]="searchText"
+            placeholder="Search" aria-label="Search">
+        <button class="btn btn-danger mr-1" (click)="logout()" type="submit">Log Out</button>
+    </form>
+</nav>
+<!-- SideNav Bar -->
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav">
+        <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+
+        <h4 class="name" style="font-family:'Times New Roman', Times, serif;">
+            {{studentList.studentName}}</h4>
+
+        <mat-divider></mat-divider>
+
+        <a mat-button class="menu-button">
+            <mat-icon>home</mat-icon>
+            <span>Home</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentProfile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+        </a>
+        <a mat-button class="menu-button" routerLink="/message">
+            <mat-icon>message</mat-icon>
+            <span>Message</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentCourse">
+            <mat-icon>file_copy</mat-icon>
+            <span>Courses</span>
+        </a>
+
+        <a mat-button class="menu-button" routerLink="/studentMaterial">
+            <mat-icon>more</mat-icon>
+            <span>View Material</span>
+        </a>
+
+    </mat-sidenav>
+    <!-- Main Content -->
+    <mat-sidenav-content class="content mat-elevation-z8">
+        <div class="content" style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+
+            <div class="row no-gutters">
+                <div class="col-md-8  col-sm-12 ">
+                    <ngb-carousel class="shadow d-flex">
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper">
+                                <img src="../../assets/images/s2.png" width="100%" height="350px"
+                                    alt="Random second slide">
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide>
+                            <div class="picsum-img-wrapper">
+                                <img src="../../assets/images/s3.png" width="100%" height="350px"
+                                    alt="Random third slide">
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                    <div class="card  overflow-auto "
+                        style="max-width: 100%; background-image: url(../../assets/images/notice.jpg); height: 175px">
+                        <div class="row no-gutters"
+                            style="font-family:'Times New Roman', Times, serif;font-size: 15px;">
+
+                            <div class="col-md-12">
+                                <div class="card-body ">
+                                    <marquee width="100%" direction="up" scrollamount="3" class="text-white">
+                                        <ol start="1" class="text-white">
+                                            <div *ngFor="let notice of noticeList">
+                                                <li>
+                                                    <p> {{notice.title}}
+                                                        <a href="{{notice.link}}" *ngIf="notice.link" target="_blank">
+                                                            <button class="btn btn-danger text-white"
+                                                                style="font-size: 10px; border-radius: 15px;">Click
+                                                                Here</button></a>
+                                                    </p>
+                                                </li>
+                                            </div>
+                                        </ol>
+                                    </marquee>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+                    <div class="card shadow d-flex overflow-auto " style="max-width: 100%;  height: 175px; ">
+                        <div class="row no-gutters"
+                            style="font-family:'Times New Roman', Times, serif;font-size: 15px;">
+                            <div class="col-md-12 ">
+                                <div class="card-body">
+                                    <h3 class="card-title blink_me text-danger text-center" style="font-size: 30px">
+                                        <strong>STUDY IN INDIA</strong> </h3>
+                                    <p class="card-text text-center">If you are willing to study in India then</p>
+                                    <button class="button-71 ml-5"  routerLink="/studentStudyInIndia" role="button">Click
+                                        Here </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row mt-3 ">
+                <div class="col-lg-4 col-md-6 col-sm-6 my-1"
+                    style="font-family:'Times New Roman', Times, serif;font-size: 20px;"
+                    *ngFor="let course of courseList | filter : searchText">
+                    <button class="glow-on-hover" type="button"
+                        style="font-family:'Times New Roman', Times, serif;font-size: 22px;height: 90px;">{{course.courseName}}</button>
+                </div>
+            </div>
+
+            <ng-template #content let-modal>
+                <div class="modal-header">
+                    <button class="btn btn-dark float-center"
+                        style="  background: linear-gradient(to right, #373b44, #4286f4) !important; height: 40px;font-family:'Times New Roman', Times, serif;font-size: 20px;">
+                        STUDY IN INDIA</button>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form style="font-family:'Times New Roman', Times, serif;font-size: 18px;">
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput" class="text-danger"> <strong>Name</strong></label>
+                            <input type="text" class="form-control" id="formGroupExampleInput"
+                                placeholder="Enter your Name ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Phone</strong></label>
+                            <input type="number" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Email</strong></label>
+                            <input type="email" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Address</strong></label>
+                            <input type="email" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Preffered
+                                    College</strong></label>
+                            <input type="email" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your preffered college">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Preffered
+                                    Courses</strong></label>
+                            <input type="email" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your course">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2" class="text-danger"> <strong>Budget</strong></label>
+                            <input type="email" class="form-control" id="formGroupExampleInput2"
+                                placeholder="Enter your budget">
+                        </div>
+
+
+
+                        <button class="btn btn-success float-right">Submit</button>
+
+
+
+
+
+
+                    </form>
+                </div>
+            </ng-template>
+
+        </div>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

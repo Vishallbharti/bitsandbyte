@@ -1,0 +1,126 @@
+<nav class="navbar navbar-dark text-white  justify-content-between" style="background-color: 
+#002b5c; padding: 2px;">
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+
+  <a class="navbar-brand ml-3 " style="font-family:'Times New Roman', Times, serif;font-size: 22px;"> Bits And Byte Institute of Technology</a>
+
+
+  <form class="form-inline">
+
+    <a class="btn mr-1" type="button" routerLink="/userBlog" id="dropdownMenu2" data-toggle="dropdown">
+      <i class="fa fa-rss text-white fa-2x" style="font-size: 25px;" aria-hidden="true"></i>
+    </a>
+
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-danger mr-1" type="submit" (click)='logout()'>Log Out</button>
+  </form>
+</nav>
+
+<!-- Side Nav Bar -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <img class="avatar mat-elevation-z8" src="../../assets/images/user.jpg" />
+    <h4 class="name" >{{user.name}}</h4>
+    <mat-divider></mat-divider>
+
+    <a mat-button class="menu-button" routerLink="/userDashboard">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/userProfile">
+      <mat-icon>person</mat-icon>
+      <span>My Profile</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/userCourses">
+      <mat-icon>file_copy</mat-icon>
+      <span>Courses</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/createBlog">
+      <mat-icon>create</mat-icon>
+      <span>Create Blog</span>
+    </a>
+
+    <a mat-button class="menu-button" routerLink="/userPendingBlog">
+      <mat-icon> near_me</mat-icon>
+      <span>Pending Blog</span>
+    </a>
+
+  </mat-sidenav>
+  <!-- Main Content Here -->
+
+  <mat-sidenav-content class="content mat-elevation-z8 ">
+    <!-- <div class="content mat-elevation-z8"> -->
+   
+    <div class="content ">
+      <nav aria-label="breadcrumb" style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/userDashboard">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Profile</li>
+        </ol>
+      </nav>
+
+      
+
+      <form style="font-family:'Times New Roman', Times, serif;font-size: 16px;">
+        <!--  -->
+        <!-- 
+        <div class="form-row float-right">
+          <div class="form-group col-md-3">
+            <div style="text-align:center">
+
+              <div><img src="../../assets/images/alok.jpg" width="250px" height="250px" class=" p_img"></div>
+
+            </div>
+
+          </div>
+        </div> -->
+
+
+        <!--  -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="id" class="text-danger" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> Student ID</label>
+            <h4 class="text-dark" style="font-family:'Times New Roman', Times, serif;font-size: 18px;"> <b>{{user.id}}</b></h4>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="id" class="text-danger" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> Name</label>
+            <h4 class="text-dark" style="font-family:'Times New Roman', Times, serif;font-size: 18px;"> <b>{{user.name}}</b></h4>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="id" class="text-danger" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> Phone</label>
+            <h4 class="text-dark" style="font-family:'Times New Roman', Times, serif;font-size: 18px;"> <b>{{user.phone}}</b></h4>
+          </div>
+        </div>
+
+        <!--  -->
+
+        <div class="form-row">
+          <div class="form-group col-md-6" >
+            <label for="id" class="text-danger" style="font-family:'Times New Roman', Times, serif;font-size: 20px;"> Username</label>
+            <h4 class="text-dark" style="font-family:'Times New Roman', Times, serif;font-size: 18px;"> <b>{{user.username}}</b></h4>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="id" class="text-danger" style="font-family:'Times New Roman', Times, serif;font-size: 20px;">Email</label>
+            <h4 class="text-dark" style="font-family:'Times New Roman', Times, serif;font-size: 18px;"> <b>{{user.email}}</b></h4>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,35 @@
+.content {
+ 
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 30px;
+    font-size: 13px;
+    margin-right: 30px;
+
+}
+
+.l-bg-blue-dark {
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color: #fff;
+}
+
+.btn:hover{
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color:white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   
+}
+
+.btn{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.nav_content {
+ 
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 30px;
+    font-size: 13px;
+    margin-right: 30px;
+
+}
